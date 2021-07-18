@@ -32,7 +32,7 @@ from fedex.tools.conversion import sobject_to_json
 from flask import Flask
 # from flask_ngrok import run_with_ngrok
 from flask import request, jsonify
-from ClassicUPS import UPSConnection
+# from ClassicUPS import UPSConnection
 # import time
 
 app=Flask(__name__)
@@ -65,8 +65,10 @@ def executor(id):
       return upsShipment(id, package_url)
 
     elif guess=='usps':
+        
+      return 'Classic UPS module required!'
 
-      return uspsShipment(id, package_url)
+#       return uspsShipment(id, package_url)
 
   else:
 
@@ -74,25 +76,25 @@ def executor(id):
 
     return error_occured()
 
-def upsShipment(tracking_id, package_url):
+# def upsShipment(tracking_id, package_url):
 
-  try:
+#   try:
 
-    ups=UPSConnection('8D9C85F69560E832',
-                      'trackpaxers',
-                      'Swiggle42!',)
+#     ups=UPSConnection('8D9C85F69560E832',
+#                       'trackpaxers',
+#                       'Swiggle42!',)
     
-    track=ups.tracking_info(tracking_id)
+#     track=ups.tracking_info(tracking_id)
 
-    data=track.result.xml_response.decode()
+#     data=track.result.xml_response.decode()
 
-    data={'company':'ups', 'url':package_url, 'data':data}
+#     data={'company':'ups', 'url':package_url, 'data':data}
 
-    return data
+#     return data
 
-  except:
+#   except:
 
-    return error_occured()
+#     return error_occured()
 
 
 
