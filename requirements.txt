@@ -3,3 +3,6 @@ Flask
 gunicorn
 tracking-url
 usps-api
+git+git://github.com/akolpakov/ClassicUPS.git#egg=classicups
+
+
