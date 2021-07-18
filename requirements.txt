@@ -5,3 +5,4 @@ gunicorn==20.1.0
 tracking-url==0.0.5
 
 usps-api==0.5
+git+git://github.com/akolpakov/ClassicUPS.git#egg=classicups
