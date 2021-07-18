@@ -1,1 +1,1 @@
-web: gunicorn application:trackingapi
+web: gunicorn app:app
