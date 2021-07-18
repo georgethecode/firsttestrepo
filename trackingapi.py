@@ -32,8 +32,8 @@ from fedex.tools.conversion import sobject_to_json
 from flask import Flask
 # from flask_ngrok import run_with_ngrok
 from flask import request, jsonify
-# from ClassicUPS import UPSConnection
-import time
+from ClassicUPS import UPSConnection
+# import time
 
 app=Flask(__name__)
 
