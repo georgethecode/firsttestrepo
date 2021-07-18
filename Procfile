@@ -1,3 +1,1 @@
-web: python trackingapi:app
-gunicorn --log-file=- onbytes.wsgi:trackingapi.py
-
+web: gunicorn app:trackingapi
