@@ -61,14 +61,14 @@ def executor(id):
             return fedexShipment(id, package_url)
 
         elif guess=='ups':
+            
+            return 'Classic UPS module required!'
 
-            return upsShipment(id, package_url)
+#             return upsShipment(id, package_url)
 
         elif guess=='usps':
 
-            return 'Classic UPS module required!'
-
-    #       return uspsShipment(id, package_url)
+            return uspsShipment(id, package_url)
 
     else:
 
