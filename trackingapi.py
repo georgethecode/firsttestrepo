@@ -158,7 +158,7 @@ def error_occured():
 
   return error
 
-app.run()
+app.run(debug=False)
 
 
 
