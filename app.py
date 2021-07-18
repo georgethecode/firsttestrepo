@@ -158,15 +158,13 @@ def error_occured():
 
     return error
 
-app.run(debug=False)
+if __name__ == "__main__":
+    app.run()
 
-# if __name__ == "__main__":
-#     app.run()
-
-if __name__ == '__main__':
-    # Bind to PORT if defined, otherwise default to 5000.
-    port = int(os.environ.get('PORT', 5004))
-    app.run(host='0.0.0.0', port=port)
+# if __name__ == '__main__':
+#     # Bind to PORT if defined, otherwise default to 5000.
+#     port = int(os.environ.get('PORT', 5004))
+#     app.run(host='0.0.0.0', port=port)
 
 
 
