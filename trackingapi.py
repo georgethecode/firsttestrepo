@@ -32,12 +32,16 @@ from fedex.tools.conversion import sobject_to_json
 from flask import Flask
 # from flask_ngrok import run_with_ngrok
 from flask import request, jsonify
-from ClassicUPS import UPSConnection
+# from ClassicUPS import UPSConnection
 import time
 
 app=Flask(__name__)
 
 # run_with_ngrok(app)
+
+@app.route('/')
+def first():
+    return 'App is live!'
 
 @app.route('/api/<id>')
 def executor(id):
