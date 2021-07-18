@@ -46,35 +46,35 @@ def first():
 @app.route('/api/<id>')
 def executor(id):
 
-  guess=tracking_url.guess_carrier(id)
+    guess=tracking_url.guess_carrier(id)
 
-  if guess:
+    if guess:
 
-    package_url=guess.url
+        package_url=guess.url
 
-    guess=guess.carrier
+        guess=guess.carrier
 
-    print(guess, package_url)
+        print(guess, package_url)
 
-    if guess=='fedex':
+        if guess=='fedex':
 
-      return fedexShipment(id, package_url)
+            return fedexShipment(id, package_url)
 
-    elif guess=='ups':
+        elif guess=='ups':
 
-      return upsShipment(id, package_url)
+            return upsShipment(id, package_url)
 
-    elif guess=='usps':
-        
-      return 'Classic UPS module required!'
+        elif guess=='usps':
 
-#       return uspsShipment(id, package_url)
+            return 'Classic UPS module required!'
 
-  else:
+    #       return uspsShipment(id, package_url)
 
-    error_msg={'data':'No data found'}
+    else:
 
-    return error_occured()
+        error_msg={'data':'No data found'}
+
+        return error_occured()
 
 # def upsShipment(tracking_id, package_url):
 
@@ -100,65 +100,68 @@ def executor(id):
 
 def uspsShipment(tracking_id, package_url):
 
-  try:
+    try:
 
-    user='594TRACK3149'
+        user='594TRACK3149'
 
-    conn=USPSApi(user)
+        conn=USPSApi(user)
 
-    track=conn.track(tracking_id)
+        track=conn.track(tracking_id)
 
-    data={'company':'usps','url':package_url, 'data':track.result}
+        data={'company':'usps','url':package_url, 'data':track.result}
 
-    return data
+        return data
 
-  except:
-    
-    return error_occured()
+    except:
+
+        return error_occured()
 
 
 
 def fedexShipment(tracking_id, package_url):
 
-  try:
+    try:
 
-    CONFIG_OBJ = FedexConfig(key='hCXl7hCb73961EWa',
-                             
-                            password='dpBrCgq3LvbtHup5EUS2WwM0q',
-                             
-                            account_number='510087100',
-                             
-                            meter_number='119228198',
-                             
-                            use_test_server='https://wsbeta.fedex.com:443/web-services')
-    
-    track = FedexTrackRequest(CONFIG_OBJ)
+        CONFIG_OBJ = FedexConfig(key='hCXl7hCb73961EWa',
 
-    track.SelectionDetails.PackageIdentifier.Type = 'TRACKING_NUMBER_OR_DOORTAG'
+        password='dpBrCgq3LvbtHup5EUS2WwM0q',
 
-    track.SelectionDetails.PackageIdentifier.Value = tracking_id
+        account_number='510087100',
 
-    track.send_request()
+        meter_number='119228198',
 
-    response_dict = sobject_to_dict(track.response)
+        use_test_server='https://wsbeta.fedex.com:443/web-services')
 
-    response_json = sobject_to_json(track.response)
+        track = FedexTrackRequest(CONFIG_OBJ)
 
-    data={'company':'fedex', 'url':package_url, 'data':response_json}
+        track.SelectionDetails.PackageIdentifier.Type = 'TRACKING_NUMBER_OR_DOORTAG'
 
-    return data
+        track.SelectionDetails.PackageIdentifier.Value = tracking_id
 
-  except:
+        track.send_request()
 
-    return error_occured()
+        response_dict = sobject_to_dict(track.response)
+
+        response_json = sobject_to_json(track.response)
+
+        data={'company':'fedex', 'url':package_url, 'data':response_json}
+
+        return data
+
+    except:
+
+        return error_occured()
 
 def error_occured():
 
-  error={'Data':'Some error occured!'}
+    error={'Data':'Some error occured!'}
 
-  return error
+    return error
 
 app.run(debug=False)
+
+if __name__ == "__main__":
+    app.run()
 
 
 
