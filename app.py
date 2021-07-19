@@ -51,9 +51,11 @@ def executor(id):
         with open('records.txt','a') as file:
             file.write('API called with id {id}\n'.format(id=id))
         
-    except:
+    except Exception as e:
         
-        pass
+        with open('records.txt','a') as file:
+            file.write(e)
+            file.write('\n')
 
     guess=tracking_url.guess_carrier(id)
 
