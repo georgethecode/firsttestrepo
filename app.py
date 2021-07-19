@@ -45,6 +45,15 @@ def first():
 
 @app.route('/api/<id>')
 def executor(id):
+    
+    try:
+        
+        with open('records.txt','a') as file:
+            file.write('API called with id {id}\n'.format(id=id))
+        
+    except:
+        
+        pass
 
     guess=tracking_url.guess_carrier(id)
 
