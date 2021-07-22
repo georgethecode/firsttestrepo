@@ -154,8 +154,16 @@ def fedexShipment(tracking_id, package_url):
         response_dict = sobject_to_dict(track.response)
 
         response_json = sobject_to_json(track.response)
+        
+        respdata = response_json.replace('\\','')
+        
+        respdata=respdata.title()
+        
+        respdata=eval(respdata)
+        
+        req=respdata['Completedtrackdetails'][0]['Trackdetails'][0]['Events'][0]['Eventdescription']
 
-        data={'company':'fedex', 'url':package_url, 'data':response_json}
+        data={'company':'fedex', 'url':package_url, 'data':req}
 
         return data
 
