@@ -118,6 +118,28 @@ def uspsShipment(tracking_id, package_url):
         conn=USPSApi(user)
 
         track=conn.track(tracking_id)
+        
+        #updating from here for TrackSummary
+        
+        res=track.result
+        
+        trackingStatus = usps.track(trackingNumber1).result
+        trackingResponse = trackingStatus.get('TrackResponse')
+        trackingInfo = trackingResponse.get('TrackInfo')
+        trackingError = trackingInfo.get('Error')
+        trackingId = trackingInfo.get('@ID')
+        
+        data=''
+
+        if trackingError is None:
+            trackingSummary = trackingInfo.get('TrackSummary')
+            trackingDetail = trackingInfo.get('TrackDetail')
+            data='Tracking Number {0}'.format(trackingId)
+            data+='Tracking Summary {0}'.format(trackingSummary)
+            data+='Tracking Detail:'
+            data+=trackingDetail
+            
+        return data
 
         data={'company':'usps','url':package_url, 'data':track.result}
 
