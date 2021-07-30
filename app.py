@@ -127,7 +127,7 @@ def uspsShipment(tracking_id, package_url):
         
         result=res['TrackResponse']['TrackInfo']['TrackSummary']
         
-        result=result['Event']
+        result=result['Event'] + result['EventDate']
         
         
 
