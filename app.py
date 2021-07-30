@@ -121,27 +121,45 @@ def uspsShipment(tracking_id, package_url):
         
         #updating from here for TrackSummary
         
+        null=None
+        
         res=track.result
         
-        trackingStatus = usps.track(tracking_id).result
-        trackingResponse = trackingStatus.get('TrackResponse')
-        trackingInfo = trackingResponse.get('TrackInfo')
-        trackingError = trackingInfo.get('Error')
-        trackingId = trackingInfo.get('@ID')
+        result=res['TrackResponse']['TrackInfo']['TrackSummary']
         
-        data=''
+        result=result['Event']
+        
+        
 
-        if trackingError is None:
-            trackingSummary = trackingInfo.get('TrackSummary')
-            trackingDetail = trackingInfo.get('TrackDetail')
-            data='Tracking Number {0}'.format(trackingId)
-            data+='Tracking Summary {0}'.format(trackingSummary)
-            data+='Tracking Detail:'
-            data+=trackingDetail
+        
+        
+        
+        
+        
+        
+        
+        
+#         trackingStatus = usps.track(tracking_id).result
+#         trackingResponse = trackingStatus.get('TrackResponse')
+#         trackingInfo = trackingResponse.get('TrackInfo')
+#         trackingError = trackingInfo.get('Error')
+#         trackingId = trackingInfo.get('@ID')
+        
+#         data=''
+
+#         if trackingError is None:
+#             trackingSummary = trackingInfo.get('TrackSummary')
+#             trackingDetail = trackingInfo.get('TrackDetail')
+#             data='Tracking Number {0}'.format(trackingId)
+#             data+='Tracking Summary {0}'.format(trackingSummary)
+#             data+='Tracking Detail:'
+#             data+=trackingDetail
             
-        return data
+#         return data
 
-        data={'company':'usps','url':package_url, 'data':track.result}
+#         data={'company':'usps','url':package_url, 'data':track.result}   original returned data (working live)
+
+        data={'company':'usps','url':package_url, 'data':result}
 
         return data
 
