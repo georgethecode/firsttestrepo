@@ -123,7 +123,7 @@ def uspsShipment(tracking_id, package_url):
         
         res=track.result
         
-        trackingStatus = usps.track(trackingNumber1).result
+        trackingStatus = usps.track(tracking_id).result
         trackingResponse = trackingStatus.get('TrackResponse')
         trackingInfo = trackingResponse.get('TrackInfo')
         trackingError = trackingInfo.get('Error')
