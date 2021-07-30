@@ -34,6 +34,7 @@ from flask import Flask
 from flask import request, jsonify
 from ClassicUPS import UPSConnection
 # import time
+import xml.etree.ElementTree as ET
 
 app=Flask(__name__)
 
@@ -98,6 +99,8 @@ def upsShipment(tracking_id, package_url):
     track=ups.tracking_info(tracking_id)
 
     data=track.result.xml_response.decode()
+    
+    data=ET.fromstring(data)
     
     #updating from here
     
