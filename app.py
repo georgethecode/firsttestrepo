@@ -113,6 +113,14 @@ def upsShipment(tracking_id, package_url):
             data=pack[0][2].text
             
             data=data[:4] + '-' + data[4:6] + '-' + data[6:]
+            
+            if pack[0][1].text.lower()=='y':
+                
+                data='Delivered on ' + data
+                
+            else:
+                
+                data='Scheduled delivery on ' + data
         
         
     else:
