@@ -99,7 +99,7 @@ def upsShipment(tracking_id, package_url):
 
     data=track.result.xml_response.decode()
 
-    data={'company':'ups', 'url':package_url, 'data':data}
+    data={'status':True, 'company':'ups', 'url':package_url, 'data':data}
 
     return data
 
@@ -159,7 +159,7 @@ def uspsShipment(tracking_id, package_url):
 
 #         data={'company':'usps','url':package_url, 'data':track.result}   original returned data (working live)
 
-        data={'company':'usps','url':package_url, 'data':result}
+        data={'status':True, 'company':'usps','url':package_url, 'data':result}
 
         return data
 
@@ -203,7 +203,7 @@ def fedexShipment(tracking_id, package_url):
         
         req=respdata['Completedtrackdetails'][0]['Trackdetails'][0]['Events'][0]['Eventdescription']
 
-        data={'company':'fedex', 'url':package_url, 'data':req}
+        data={'status':True, 'company':'fedex', 'url':package_url, 'data':req}
 
         return data
 
@@ -213,7 +213,7 @@ def fedexShipment(tracking_id, package_url):
 
 def error_occured():
 
-    error={'Data':'Some error occured!'}
+    error={'status':False, 'Data':'Some error occured!'}
 
     return error
 
