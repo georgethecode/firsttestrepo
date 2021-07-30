@@ -98,6 +98,27 @@ def upsShipment(tracking_id, package_url):
     track=ups.tracking_info(tracking_id)
 
     data=track.result.xml_response.decode()
+    
+    #updating from here
+    
+    pack=data[1].findall('Package')
+    
+    if len(pack)>0:
+        
+        if pack[0][2].text:
+            
+            data=pack[0][2].text
+            
+            data=data[:4] + '-' + data[4:6] + '-' + data[6:]
+        
+        
+    else:
+        
+        data='Delivery pending.'
+    
+    
+ #updates till here
+    
 
     data={'status':True, 'company':'ups', 'url':package_url, 'data':data}
 
@@ -158,6 +179,9 @@ def uspsShipment(tracking_id, package_url):
 #         return data
 
 #         data={'company':'usps','url':package_url, 'data':track.result}   original returned data (working live)
+
+
+#updates till here
 
         data={'status':True, 'company':'usps','url':package_url, 'data':result}
 
