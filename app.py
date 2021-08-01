@@ -206,7 +206,7 @@ def uspsShipment(tracking_id, package_url):
 
 def fedexShipment(tracking_id, package_url):
     
-    global package_url
+#     global package_url
 
     try:
 
