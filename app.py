@@ -236,9 +236,9 @@ def fedexShipment(tracking_id, package_url):
         
         respdata=eval(respdata)
         
-        req=respdata['Completedtrackdetails'][0]['Trackdetails'][0]['Events'][0]['Eventdescription']
+#         req=respdata['Completedtrackdetails'][0]['Trackdetails'][0]['Events'][0]['Eventdescription']
 
-        data={'status':True, 'company':'fedex', 'url':package_url, 'data':req}
+        data={'status':True, 'company':'fedex', 'url':package_url, 'data':respdata}
 
         return data
 
