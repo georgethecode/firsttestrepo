@@ -205,6 +205,8 @@ def uspsShipment(tracking_id, package_url):
 
 
 def fedexShipment(tracking_id, package_url):
+    
+    global package_url
 
     try:
 
@@ -238,7 +240,7 @@ def fedexShipment(tracking_id, package_url):
         
 #         req=respdata['Completedtrackdetails'][0]['Trackdetails'][0]['Events'][0]['Eventdescription']
 
-        data={'status':True, 'company':'fedex', 'url':package_url, 'data':response_data}
+        data={'status':True, 'company':'fedex', 'url':package_url, 'data':response_json}
 
         return data
 
